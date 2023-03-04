@@ -16,3 +16,8 @@ export const customIncrement = createAction(
   props<{count: number}>()
 )
 
+export const changeText = createAction(
+  'changeText',
+  props<{textNew: string}>()
+)
+

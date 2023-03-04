@@ -2,6 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import { Store } from "@ngrx/store";
 import {StateCounterInterface} from "../../../types/interfaces";
 import {Subscription} from "rxjs";
+import {getCounter} from "../state/counter.selectors";
 
 @Component({
   selector: 'app-counter-output',
@@ -18,9 +19,17 @@ export class CounterOutputComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
-    this.counterSubscription = this.store.select('counterInStore').subscribe(data => {
-      this.counter = data.counter
-    })
+    /* * Два способа  Смотреть в файле селекторов почему так*/
+    // this.counterSubscription = this.store.select('counterInStore')
+    //   .subscribe(data => {
+    //     console.warn('Counter count change')
+    //     this.counter = data.counter
+    // })
+    this.counterSubscription = this.store.select(getCounter)
+      .subscribe(data => {
+        console.warn('Counter count change')
+        this.counter = data
+      })
   }
 
   ngOnDestroy() {

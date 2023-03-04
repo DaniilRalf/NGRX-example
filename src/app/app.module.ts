@@ -11,6 +11,10 @@ import { CounterOutputComponent } from './counter/counter-output/counter-output.
 import { counterReducer } from "./counter/state/counter.reducer";
 import { CustomCounterInputComponent } from './counter/custom-counter-input/custom-counter-input.component'
 import {FormsModule} from "@angular/forms";
+import { HomeComponent } from './home/home.component';
+import {AppRoutingModule} from "./app-routing.module";
+import { HeaderComponent } from './shared/components/header/header.component';
+import { PostsListComponent } from './posts/posts-list/posts-list.component';
 
 @NgModule({
   declarations: [
@@ -18,15 +22,20 @@ import {FormsModule} from "@angular/forms";
     CounterComponent,
     CounterButtonsComponent,
     CounterOutputComponent,
-    CustomCounterInputComponent
+    CustomCounterInputComponent,
+    HomeComponent,
+    HeaderComponent,
+    PostsListComponent
   ],
   imports: [
     BrowserModule,
     RouterOutlet,
     StoreModule.forRoot({counterInStore: counterReducer}),
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
+    /* * StoreDevtoolsModule работает в связке с расширение Redux chrome extension*/
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: isDevMode()}),
     EffectsModule.forRoot([]),
-    FormsModule
+    FormsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

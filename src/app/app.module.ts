@@ -15,6 +15,8 @@ import { HomeComponent } from './home/home.component';
 import {AppRoutingModule} from "./app-routing.module";
 import { HeaderComponent } from './shared/components/header/header.component';
 import { PostsListComponent } from './posts/posts-list/posts-list.component';
+import {postsReducer} from "./posts/state/posts.reducer";
+import {appReducer} from "./store/app.state";
 
 @NgModule({
   declarations: [
@@ -30,9 +32,15 @@ import { PostsListComponent } from './posts/posts-list/posts-list.component';
   imports: [
     BrowserModule,
     RouterOutlet,
-    StoreModule.forRoot({counterInStore: counterReducer}),
+
+    /* * Тут два варианта, либо создать отдельный файл где сосздать обьект со всеми Состояниями которые есть в приложении
+     * * либо разложить их прям тут как обьект, воспользуемся первым вариантом поскольку он более чистый */
+    StoreModule.forRoot(appReducer),
+    // StoreModule.forRoot({counterInStore: counterReducer, postsInStore: postsReducer}),
+
     /* * StoreDevtoolsModule работает в связке с расширение Redux chrome extension*/
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: isDevMode()}),
+
     EffectsModule.forRoot([]),
     FormsModule,
     AppRoutingModule
